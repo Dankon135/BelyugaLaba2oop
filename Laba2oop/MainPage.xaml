@@ -1,0 +1,98 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Laba2oop.MainPage">
+
+    <Grid ColumnDefinitions="*,2*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,1*">
+
+        <!-- Ліва колонка: введення та вибір -->
+        <Picker Grid.Row="0" Grid.Column="0"
+                x:Name="MethodPicker"
+                Title="Виберіть метод обробки XML"
+                BackgroundColor="Black">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>SAX</x:String>
+                    <x:String>DOM</x:String>
+                    <x:String>LINQ to XML</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Entry Grid.Row="1" Grid.Column="0"
+               x:Name="SearchQueryEntry"
+               Placeholder="Введіть пошуковий запит"
+               BackgroundColor="Black"/>
+
+        <Picker Grid.Row="2" Grid.Column="0"
+                x:Name="SearchTypePicker"
+                Title="Виберіть тип пошуку"
+                BackgroundColor="Black">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>title</x:String>
+                    <x:String>author</x:String>
+                    <x:String>year</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Grid.Row="3" Grid.Column="0"
+                Text="Вибрати XML файл"
+                BackgroundColor="#4CAF50"
+                TextColor="Black"
+                CornerRadius="10"
+                Clicked="OnPickXmlFileClicked" />
+
+        <Button Grid.Row="4" Grid.Column="0"
+                Text="Аналізувати файл"
+                BackgroundColor="#2196F3"
+                TextColor="Black"
+                CornerRadius="10"
+                Clicked="OnAnalyzeClicked" />
+        
+
+        <!-- Нова кнопка для трансформації XML в HTML -->
+        <Button Grid.Row="5" Grid.Column="0"
+                Text="Трансформувати XML в HTML"
+                BackgroundColor="#FFA500"
+                TextColor="Black"
+                CornerRadius="10"
+                Clicked="OnTransformToHtmlClicked"/>
+
+        <Button Grid.Row="6" Grid.Column="0"
+                Text="Очистити"
+                BackgroundColor="#F44336"
+                TextColor="Black"
+                CornerRadius="10"
+                Clicked="OnClearClicked" />
+
+        <Button Grid.Row="7" Grid.Column="0"
+        Text="❌"
+        BackgroundColor="#FF334B"
+        TextColor="White"
+        CornerRadius="10"
+        Clicked="OnExitButtonClicked"
+        FontFamily="Arial"
+        FontSize="16"
+        HeightRequest="40"
+        WidthRequest="100">
+        </Button>
+
+
+
+        <!-- Права колонка: виведення результатів -->
+        <Label Grid.Row="0" Grid.Column="1"
+               Text="Результати:"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Editor Grid.Row="1" Grid.RowSpan="7" Grid.Column="1"
+                x:Name="ResultEditor"
+                IsReadOnly="True"
+                TextColor="Black"
+                BackgroundColor="#EEEEEE"
+                VerticalOptions="FillAndExpand"/>
+        
+
+    </Grid>
+</ContentPage>

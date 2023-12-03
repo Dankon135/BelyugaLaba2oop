@@ -1,0 +1,1 @@
+C:\Users\Денис\source\repos\Laba2oop\Laba2oop\Laba2oop.csproj;x64
