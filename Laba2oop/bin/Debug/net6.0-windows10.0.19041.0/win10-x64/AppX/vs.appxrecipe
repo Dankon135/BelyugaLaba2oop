@@ -29,13 +29,13 @@
     <AppXManifest Include="C:\Users\Денис\source\repos\Laba2oop\Laba2oop\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-12-03T16:48:15.107</Modified>
+      <Modified>2023-12-05T18:41:25.958</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Денис\source\repos\Laba2oop\Laba2oop\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-12-03T16:42:14.588</Modified>
+      <Modified>2023-12-05T18:03:34.361</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Денис\source\repos\Laba2oop\Laba2oop\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Laba2oop.runtimeconfig.json">
       <PackagePath>Laba2oop.runtimeconfig.json</PackagePath>
@@ -43,15 +43,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Денис\source\repos\Laba2oop\Laba2oop\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Laba2oop.dll">
       <PackagePath>Laba2oop.dll</PackagePath>
-      <Modified>2023-12-03T16:48:13.843</Modified>
+      <Modified>2023-12-05T18:41:24.174</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Денис\source\repos\Laba2oop\Laba2oop\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Laba2oop.exe</PackagePath>
-      <Modified>2023-12-03T16:48:13.855</Modified>
+      <Modified>2023-12-05T18:41:24.210</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Денис\source\repos\Laba2oop\Laba2oop\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Laba2oop.deps.json">
       <PackagePath>Laba2oop.deps.json</PackagePath>
-      <Modified>2023-11-26T21:00:05.583</Modified>
+      <Modified>2023-12-04T10:53:45.029</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Денис\.nuget\packages\microsoft.netcore.app.runtime.win-x64\6.0.23\runtimes\win-x64\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>

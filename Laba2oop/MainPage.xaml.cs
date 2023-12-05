@@ -3,12 +3,14 @@ using Microsoft.Maui.Storage;
 using System;
 using Laba2oop;
 
+
 namespace Laba2oop
 {
     public partial class MainPage : ContentPage
     {
         private XmlProcessingContext _context;
         private string _selectedXmlFilePath;
+        private string _selectedXslFilePath; // Додавання шляху до XSL файлу
 
         public MainPage()
         {
@@ -26,7 +28,23 @@ namespace Laba2oop
                 if (pickResult != null)
                 {
                     _selectedXmlFilePath = pickResult.FullPath;
-                    DisplayAllXmlData(_selectedXmlFilePath);  // Виклик методу для відображення даних
+                    DisplayAllXmlData(_selectedXmlFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+            }
+        }
+
+        private async void OnPickXslFileClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var pickResult = await FilePicker.Default.PickAsync();
+                if (pickResult != null)
+                {
+                    _selectedXslFilePath = pickResult.FullPath; // Збереження шляху до XSLT файлу
                 }
             }
             catch (Exception ex)
@@ -37,9 +55,8 @@ namespace Laba2oop
 
         private void DisplayAllXmlData(string xmlFilePath)
         {
-            // Тут припускаємо, що ви використовуєте SAX метод за замовчуванням
             _context.SetStrategy(new SaxXmlProcessor());
-            string result = _context.ProcessXml(xmlFilePath, "", "");
+            string result = _context.ProcessXml(xmlFilePath, "", "", "");
             ResultEditor.Text = result;
         }
 
@@ -68,43 +85,61 @@ namespace Laba2oop
                     break;
             }
 
-            string result = _context.ProcessXml(_selectedXmlFilePath, searchQuery, searchType);
+            string result = _context.ProcessXml(_selectedXmlFilePath, _selectedXslFilePath, searchQuery, searchType);
             ResultEditor.Text = result;
         }
 
         private void OnClearClicked(object sender, EventArgs e)
         {
+
+
             ResultEditor.Text = string.Empty;
+            SearchQueryEntry.Text = string.Empty;
+
+
+            MethodPicker.SelectedIndex = MethodPicker.Items.IndexOf("SAX");
+
+
+            SearchTypePicker.SelectedIndex = SearchTypePicker.Items.IndexOf("author");
+
+
             _selectedXmlFilePath = null;
+            _selectedXslFilePath = null;
+
+
         }
+
 
         private async void OnTransformToHtmlClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_selectedXmlFilePath))
+            if (string.IsNullOrWhiteSpace(_selectedXmlFilePath) || string.IsNullOrWhiteSpace(_selectedXslFilePath))
             {
-                await DisplayAlert("Warning", "Please select an XML file first", "OK");
+                await DisplayAlert("Warning", "Please select both an XML and an XSLT file first", "OK");
                 return;
             }
 
-            string xsltFilePath = "C:\\Users\\Денис\\source\\repos\\Laba2oop\\Laba2oop\\transform.xslt";
-            string htmlOutputFilePath = "C:\\Users\\Денис\\source\\repos\\Laba2oop\\Laba2oop\\outputfile.html";
+            // Використовуємо безпечний шлях в спеціальній папці для збереження HTML файлу
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string htmlOutputFileName = "outputfile.html";
+            string htmlOutputFilePath = Path.Combine(documentsPath, htmlOutputFileName);
 
             try
             {
-                XmlTransformer.TransformXmlToHtml(_selectedXmlFilePath, xsltFilePath, htmlOutputFilePath);
-                await DisplayAlert("Success", "XML was successfully transformed to HTML.", "OK");
+                string result = XmlTransformer.TransformXmlToHtml(_selectedXmlFilePath, _selectedXslFilePath, htmlOutputFilePath);
+                await DisplayAlert("Transformation Result", result, "OK");
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"An error occurred during transformation: {ex.Message}", "OK");
             }
         }
+
+
         private async void OnExitButtonClicked(object sender, EventArgs e)
         {
             bool answer = await DisplayAlert("Підтвердження", "Чи дійсно ви хочете завершити роботу з програмою?", "Так", "Ні");
             if (answer)
             {
-                // Виконуємо вихід з програми
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
         }

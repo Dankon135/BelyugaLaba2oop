@@ -6,7 +6,7 @@ namespace Laba2oop
 {
     public class SaxXmlProcessor : IXmlProcessor
     {
-        public string ProcessXml(string xmlFilePath, string searchQuery, string searchType)
+        public string ProcessXml(string xmlFilePath, string xslFilePath, string searchQuery, string searchType)
         {
             StringBuilder result = new StringBuilder();
             bool isCorrectNode = false;
@@ -23,8 +23,8 @@ namespace Laba2oop
                             case XmlNodeType.Element:
                                 if (reader.Name.Equals("book"))
                                 {
-                                    insideBook = true; // Вказуємо, що ми всередині вузла 'book'
-                                    isCorrectNode = false; // Скидаємо прапорець для нового вузла 'book'
+                                    insideBook = true; 
+                                    isCorrectNode = false; 
                                 }
                                 else if (insideBook && reader.Name.Equals(searchType))
                                 {
@@ -35,7 +35,7 @@ namespace Laba2oop
                             case XmlNodeType.EndElement:
                                 if (reader.Name.Equals("book"))
                                 {
-                                    insideBook = false; // Виходимо з вузла 'book'
+                                    insideBook = false; 
                                 }
                                 break;
 
@@ -43,7 +43,7 @@ namespace Laba2oop
                                 if (isCorrectNode && reader.Value.Contains(searchQuery))
                                 {
                                     result.AppendLine($"Знайдено {searchType}: {reader.Value}");
-                                    isCorrectNode = false; // Скидаємо прапорець після знаходження відповідного тексту
+                                    isCorrectNode = false; 
                                 }
                                 break;
                         }

@@ -9,6 +9,6 @@ namespace Laba2oop
 {
     public interface IXmlProcessor
     {
-        string ProcessXml(string xmlFilePath, string searchQuery, string searchType);
+        string ProcessXml(string xmlFilePath, string xslFilePath, string searchQuery, string searchType);
     }
 }

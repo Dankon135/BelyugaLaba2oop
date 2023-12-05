@@ -7,7 +7,7 @@ namespace Laba2oop
 {
     public class LinqXmlProcessor : IXmlProcessor
     {
-        public string ProcessXml(string xmlFilePath, string searchQuery, string searchType)
+        public string ProcessXml(string xmlFilePath, string xslFilePath, string searchQuery, string searchType)
         {
             StringBuilder result = new StringBuilder();
             try
@@ -35,6 +35,22 @@ namespace Laba2oop
                                                       .Elements("year").Any() &&
                                                   book.Descendants("publicationQualities")
                                                       .Elements("year").First().Value.Contains(searchQuery));
+                        break;
+
+                    case "language":
+                        query = doc.Descendants("language")
+                                   .Where(book => book.Descendants("publicationQualities")
+                                                      .Elements("language").Any() &&
+                                                  book.Descendants("publicationQualities")
+                                                      .Elements("language").First().Value.Contains(searchQuery));
+                       break;
+                    
+                    case "genre":
+                        query = doc.Descendants("genre")
+                                   .Where(book => book.Descendants("publicationQualities")
+                                                      .Elements("genre").Any() &&
+                                                  book.Descendants("publicationQualities")
+                                                      .Elements("genre").First().Value.Contains(searchQuery));
                         break;
                 }
 

@@ -6,7 +6,7 @@ namespace Laba2oop
 {
     public class DomXmlProcessor : IXmlProcessor
     {
-        public string ProcessXml(string xmlFilePath, string searchQuery, string searchType)
+        public string ProcessXml(string xmlFilePath, string xslFilePath, string searchQuery, string searchType)
         {
             StringBuilder result = new StringBuilder();
             XmlDocument doc = new XmlDocument();
@@ -16,25 +16,35 @@ namespace Laba2oop
                 doc.Load(xmlFilePath);
                 XmlNodeList nodes;
 
-                // Вибір пошукової стратегії
+                
                 switch (searchType.ToLower())
                 {
                     case "title":
                         nodes = doc.DocumentElement.SelectNodes($"//book[title[contains(text(), '{searchQuery}')]]");
                         break;
                     case "author":
-                        // Ваш XPath запит для пошуку за автором
+                        
                         nodes = doc.DocumentElement.SelectNodes($"//book[author[contains(text(), '{searchQuery}')]]");
                         break;
                     case "year":
-                        // Ваш XPath запит для пошуку за роком
+                        
                         nodes = doc.DocumentElement.SelectNodes($"//book[publicationQualities/year[contains(text(), '{searchQuery}')]]");
                         break;
+                    case "language":
+                        
+                        nodes = doc.DocumentElement.SelectNodes($"//book[publicationQualities/language[contains(text(), '{searchQuery}')]]");
+                        break;
+                    case "genre":
+                        
+                        nodes = doc.DocumentElement.SelectNodes($"//book[publicationQualities/genre[contains(text(), '{searchQuery}')]]");
+                        break;
+
                     default:
+
                         return "Невизначений тип пошуку.";
                 }
 
-                // Збір результатів пошуку
+                
                 foreach (XmlNode node in nodes)
                 {
                     if (node != null)

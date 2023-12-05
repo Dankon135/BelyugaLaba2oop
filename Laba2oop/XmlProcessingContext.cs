@@ -6,21 +6,17 @@
 
         public XmlProcessingContext(IXmlProcessor xmlProcessor)
         {
-            _xmlProcessor = xmlProcessor ?? throw new ArgumentNullException(nameof(xmlProcessor));
+            _xmlProcessor = xmlProcessor;
         }
 
         public void SetStrategy(IXmlProcessor xmlProcessor)
         {
-            _xmlProcessor = xmlProcessor ?? throw new ArgumentNullException(nameof(xmlProcessor));
+            _xmlProcessor = xmlProcessor;
         }
 
-        public string ProcessXml(string xmlFilePath, string searchQuery, string searchType)
+        public string ProcessXml(string xmlFilePath, string xslFilePath, string searchQuery, string searchType)
         {
-            if (_xmlProcessor == null)
-            {
-                throw new InvalidOperationException("XML Processor is not set.");
-            }
-            return _xmlProcessor.ProcessXml(xmlFilePath, searchQuery, searchType);
+            return _xmlProcessor.ProcessXml(xmlFilePath, xslFilePath, searchQuery, searchType);
         }
     }
 }
